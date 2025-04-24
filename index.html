@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrickStream - Live Cricket at Your Fingertips</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Base Styles */
+:root {
+  --primary-color: #0a5c36;
+  --secondary-color: #1a73e8;
+  --accent-color: #ff5722;
+  --dark-color: #212121;
+  --light-color: #f5f5f5;
+  --text-color: #333333;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: #f9f9f9;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* Navbar Styles */
+.navbar {
+  background-color: white;
+  box-shadow: var(--box-shadow);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.logo-img {
+  margin-right: 10px;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  font-weight: 500;
+  transition: var(--transition);
+  padding: 5px 0;
+  position: relative;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--primary-color);
+}
+
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--primary-color);
+  border-radius: 3px;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("https://i.ibb.co/Lk3y0v7/cricket-stadium.jpg") no-repeat center center / cover;
+  color: white;
+  padding: 100px 0;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  opacity: 0.9;
+}
+
+.cta-button {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.cta-button:hover {
+  background-color: #e64a19;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(230, 74, 25, 0.3);
+}
+
+/* Main Content */
+.main-content {
+  padding: 50px 0;
+}
+
+.content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+/* Live Match Card */
+.live-match-card {
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 25px;
+  transition: var(--transition);
+}
+
+.live-match-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.match-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.live-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #f44336;
+  font-weight: 600;
+}
+
+.pulse {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #f44336;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(244, 67, 54, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(244, 67, 54, 0);
+  }
+}
+
+.match-title {
+  font-weight: 600;
+  color: var(--dark-color);
+}
+
+.teams {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.team-flag {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #eee;
+  background-color: #fff;
+}
+
+.team-name {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.team-score {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.vs {
+  font-weight: 600;
+  color: #888;
+}
+
+.match-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding: 15px 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.overs,
+.required-rate {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.value {
+  font-weight: 600;
+  color: var(--dark-color);
+}
+
+.last-ball {
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  background-color: #f5f5f5;
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+}
+
+.last-ball .value {
+  font-size: 1.1rem;
+  color: var(--secondary-color);
+  font-weight: 600;
+}
+
+.match-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.action-btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 500;
+}
+
+.action-btn:hover {
+  background-color: #084a2b;
+}
+
+/* Commentary Panel */
+.commentary-panel {
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.panel-header {
+  padding: 20px;
+  background-color: var(--primary-color);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel-header h3 {
+  font-size: 1.2rem;
+}
+
+.powered-by {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.fluvio-logo {
+  height: 20px;
+  object-fit: contain;
+  background-color: white;
+  padding: 2px;
+  border-radius: 3px;
+}
+
+.commentary-feed {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  max-height: 400px;
+}
+
+.commentary-item {
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.commentary-time {
+  font-size: 0.8rem;
+  color: #888;
+  margin-bottom: 5px;
+}
+
+.commentary-text {
+  line-height: 1.5;
+}
+
+.commentary-highlight {
+  font-weight: 600;
+  color: var(--secondary-color);
+}
+
+/* Match List */
+.match-list {
+  margin-top: 30px;
+}
+
+.match-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.match-list-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.match-list-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.match-item {
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 20px;
+  transition: var(--transition);
+}
+
+.match-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.match-item-title {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--dark-color);
+}
+
+.match-item-status {
+  color: var(--secondary-color);
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.match-item-btn {
+  width: 100%;
+  padding: 8px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.match-item-btn:hover {
+  background-color: #084a2b;
+}
+
+/* Player Search */
+.player-search {
+  margin-top: 50px;
+  padding: 30px;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.player-search-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.search-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+}
+
+.search-btn {
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.search-btn:hover {
+  background-color: #084a2b;
+}
+
+.player-result {
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: var(--border-radius);
+}
+
+.player-result h3 {
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.player-result p {
+  margin-bottom: 5px;
+}
+
+/* Footer */
+footer {
+  background-color: var(--dark-color);
+  color: white;
+  padding: 50px 0 20px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.footer-links ul {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  opacity: 0.8;
+  transition: var(--transition);
+}
+
+.footer-links a:hover {
+  opacity: 1;
+}
+
+.powered-by-footer {
+  margin-top: 20px;
+}
+
+.fluvio-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.copyright {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: var(--primary-color);
+  animation: spin 1s ease-in-out infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-container {
+  text-align: center;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .content-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .footer-links ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .powered-by-footer {
+    margin-top: 20px;
+  }
+
+  .fluvio-wrapper {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 70px 0;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .teams {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .vs {
+    margin: 10px 0;
+  }
+
+  .match-actions {
+    flex-direction: column;
+  }
+}
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="https://i.ibb.co/Jd3tVbk/cricket-ball-icon.png" alt="CrickStream Logo" class="logo-img">
+                <span>CrickStream</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">Live Scores</a></li>
+                <li><a href="#matches-section">Matches</a></li>
+                <li><a href="#player-search-section">Player Search</a></li>
+                <li><a href="#commentary-section">Commentary</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Live Cricket at Your Fingertips</h1>
+                <p>Real-time scores, commentary, and stats for cricket fans worldwide</p>
+                <button class="cta-button" id="refresh-btn">Refresh Live Data</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="main-content">
+        <div class="container">
+            <div id="loading-container" class="loading-container">
+                <div class="loading-spinner"></div>
+                <p>Loading live cricket data...</p>
+            </div>
+            
+            <div id="main-match-content" style="display: none;">
+                <div class="content-wrapper">
+                    <!-- Live Match Card -->
+                    <div class="live-match-card" id="featured-match">
+                        <div class="match-header">
+                            <div class="live-indicator">
+                                <span class="pulse"></span>
+                                <span>LIVE</span>
+                            </div>
+                            <div class="match-title" id="match-title">Loading match...</div>
+                        </div>
+                        
+                        <div class="teams">
+                            <div class="team">
+                                <img src="https://i.ibb.co/DRxnN4W/india-flag.png" alt="Team 1 Flag" class="team-flag" id="team1-flag">
+                                <span class="team-name" id="team1-name">Team 1</span>
+                                <span class="team-score" id="team1-score">-</span>
+                            </div>
+                            <div class="vs">VS</div>
+                            <div class="team">
+                                <img src="https://i.ibb.co/Jk6Lmxb/australia-flag.png" alt="Team 2 Flag" class="team-flag" id="team2-flag">
+                                <span class="team-name" id="team2-name">Team 2</span>
+                                <span class="team-score" id="team2-score">-</span>
+                            </div>
+                        </div>
+                        
+                        <div class="match-info">
+                            <div class="overs">
+                                <span class="label">Overs:</span>
+                                <span class="value" id="overs">-</span>
+                            </div>
+                            <div class="required-rate">
+                                <span class="label">Required Rate:</span>
+                                <span class="value" id="required-rate">-</span>
+                            </div>
+                        </div>
+                        
+                        <div class="last-ball">
+                            <span class="label">Last Update:</span>
+                            <span class="value" id="last-ball">-</span>
+                        </div>
+                        
+                        <div class="match-actions">
+                            <button class="action-btn" id="scorecard-btn">Full Scorecard</button>
+                            <button class="action-btn" id="squad-btn">View Squad</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Commentary Panel -->
+                    <div class="commentary-panel" id="commentary-section">
+                        <div class="panel-header">
+                            <h3>Live Commentary</h3>
+                            <div class="powered-by">
+                                <span>Powered by</span>
+                                <img src="https://i.ibb.co/Qj1JhRv/fluvio-logo.png" alt="CrickStream" class="fluvio-logo">
+                            </div>
+                        </div>
+                        
+                        <div class="commentary-feed" id="commentary-feed">
+                            <div class="commentary-item">
+                                <div class="commentary-time">Loading commentary...</div>
+                                <div class="commentary-text">Please select a match to view live commentary.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- All Matches Section -->
+            <div class="match-list" id="matches-section">
+                <div class="match-list-header">
+                    <h2 class="match-list-title">Live Matches</h2>
+                </div>
+                <div class="match-list-container" id="matches">
+                    <!-- Match items will be added dynamically -->
+                </div>
+            </div>
+            
+            <!-- Player Search Section -->
+            <div class="player-search" id="player-search-section">
+                <h2 class="player-search-title">Player Search</h2>
+                <div class="search-form">
+                    <input type="text" class="search-input" id="playerInput" placeholder="Enter player name...">
+                    <button class="search-btn" onclick="searchPlayer()">Search</button>
+                </div>
+                <div class="player-result" id="playerResult">
+                    <p>Enter a player name to see their details.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="https://i.ibb.co/Jd3tVbk/cricket-ball-icon.png" alt="CrickStream Logo" class="logo-img">
+                    <span>CrickStream</span>
+                </div>
+                <div class="footer-links">
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="powered-by-footer">
+                    <div class="fluvio-wrapper">
+                        <span>Real-time data streaming powered by</span>
+                        <img src="https://i.ibb.co/Qj1JhRv/fluvio-logo.png" alt="CrickStream" class="fluvio-logo">
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 CrickStream. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+<script>
+// Global variables to store current match data
+let currentMatchId = null;
+let allMatches = [];
+
+// Show loading state
+function showLoading() {
+    document.getElementById('loading-container').style.display = 'block';
+    document.getElementById('main-match-content').style.display = 'none';
+}
+
+// Hide loading state
+function hideLoading() {
+    document.getElementById('loading-container').style.display = 'none';
+    document.getElementById('main-match-content').style.display = 'block';
+}
+
+// Format team name to get country code for flag
+function getCountryCode(teamName) {
+    const countryMap = {
+        'india': 'in',
+        'australia': 'au',
+        'england': 'gb',
+        'pakistan': 'pk',
+        'new zealand': 'nz',
+        'south africa': 'za',
+        'west indies': 'wi',
+        'sri lanka': 'lk',
+        'bangladesh': 'bd',
+        'afghanistan': 'af',
+        'zimbabwe': 'zw',
+        'ireland': 'ie'
+    };
+    
+    const lowerTeam = teamName.toLowerCase();
+    for (const [country, code] of Object.entries(countryMap)) {
+        if (lowerTeam.includes(country)) {
+            return code;
+        }
+    }
+    return 'generic'; // Default flag
+}
+
+// Get flag URL based on team name
+function getFlagUrl(teamName) {
+    const code = getCountryCode(teamName);
+    
+    const flagMap = {
+        'in': 'https://i.ibb.co/DRxnN4W/india-flag.png',
+        'au': 'https://i.ibb.co/Jk6Lmxb/australia-flag.png',
+        'gb': 'https://i.ibb.co/0jHzZxL/england-flag.png',
+        'pk': 'https://i.ibb.co/Jdnw9cF/pakistan-flag.png',
+        'nz': 'https://i.ibb.co/YjBMSLs/new-zealand-flag.png',
+        'za': 'https://i.ibb.co/YjBMSLs/south-africa-flag.png',
+        'wi': 'https://i.ibb.co/YjBMSLs/west-indies-flag.png',
+        'lk': 'https://i.ibb.co/YjBMSLs/sri-lanka-flag.png',
+        'bd': 'https://i.ibb.co/YjBMSLs/bangladesh-flag.png',
+        'generic': 'https://i.ibb.co/YjBMSLs/cricket-flag.png'
+    };
+    
+    return flagMap[code] || flagMap.generic;
+}
+
+// Extract team names and scores from match data
+function extractTeamData(matchData) {
+    let teams = { team1: {}, team2: {} };
+    
+    if (matchData.teamInfo && matchData.teamInfo.length >= 2) {
+        teams.team1.name = matchData.teamInfo[0].name || 'Team 1';
+        teams.team2.name = matchData.teamInfo[1].name || 'Team 2';
+        teams.team1.flag = getFlagUrl(teams.team1.name);
+        teams.team2.flag = getFlagUrl(teams.team2.name);
+    }
+    
+    if (matchData.score && matchData.score.length >= 2) {
+        teams.team1.score = matchData.score[0].r + '/' + matchData.score[0].w + ' (' + matchData.score[0].o + ')';
+        teams.team2.score = matchData.score[1].r + '/' + matchData.score[1].w + ' (' + matchData.score[1].o + ')';
+    } else if (matchData.score && matchData.score.length === 1) {
+        teams.team1.score = matchData.score[0].r + '/' + matchData.score[0].w + ' (' + matchData.score[0].o + ')';
+        teams.team2.score = 'Yet to bat';
+    } else {
+        teams.team1.score = 'No score';
+        teams.team2.score = 'No score';
+    }
+    
+    return teams;
+}
+
+// Fetch and display live matches
+async function fetchLiveMatches() {
+    showLoading();
+    
+    try {
+        const res = await fetch('/api/live-matches');
+        const data = await res.json();
+        
+        if (!data.data || data.data.length === 0) {
+            document.getElementById('matches').innerHTML = '<p>No live matches available at the moment.</p>';
+            hideLoading();
+            return;
+        }
+        
+        allMatches = data.data;
+        const matchesContainer = document.getElementById('matches');
+        matchesContainer.innerHTML = '';
+
+        // Display all matches
+        data.data.forEach((match, index) => {
+            const matchDiv = document.createElement('div');
+            matchDiv.className = 'match-item';
+            matchDiv.innerHTML = `
+                <h3 class="match-item-title">${match.name}</h3>
+                <p class="match-item-status">${match.status}</p>
+                <button class="match-item-btn" onclick="selectMatch('${match.id}', ${index})">View Details</button>
+            `;
+            matchesContainer.appendChild(matchDiv);
+        });
+
+        // Select the first match by default
+        if (data.data.length > 0) {
+            selectMatch(data.data[0].id, 0);
+        }
+        
+        hideLoading();
+    } catch (err) {
+        console.error('Error fetching live matches:', err);
+        document.getElementById('matches').innerHTML = '<p>Error loading matches. Please try again later.</p>';
+        hideLoading();
+    }
+}
+
+// Select a match to display details
+async function selectMatch(matchId, index) {
+    showLoading();
+    currentMatchId = matchId;
+    
+    try {
+        // Get match details
+        const match = allMatches[index];
+        
+        // Update match title
+        document.getElementById('match-title').textContent = match.name;
+        
+        // Get match score
+        const scoreRes = await fetch(`/api/match-score/${matchId}`);
+        const scoreData = await scoreRes.json();
+        
+        if (scoreData.data) {
+            const teamData = extractTeamData(scoreData.data);
+            
+            // Update team names and scores
+            document.getElementById('team1-name').textContent = teamData.team1.name;
+            document.getElementById('team2-name').textContent = teamData.team2.name;
+            document.getElementById('team1-score').textContent = teamData.team1.score;
+            document.getElementById('team2-score').textContent = teamData.team2.score;
+            document.getElementById('team1-flag').src = teamData.team1.flag;
+            document.getElementById('team2-flag').src = teamData.team2.flag;
+            
+            // Update match info
+            if (scoreData.data.status) {
+                document.getElementById('last-ball').textContent = scoreData.data.status;
+            }
+            
+            // Get current overs if available
+            if (scoreData.data.score && scoreData.data.score.length > 0) {
+                const currentInnings = scoreData.data.score[scoreData.data.score.length - 1];
+                document.getElementById('overs').textContent = currentInnings.o || '-';
+                
+                // Calculate required rate if applicable
+                if (scoreData.data.score.length > 1) {
+                    const target = scoreData.data.score[0].r + 1;
+                    const current = scoreData.data.score[1].r;
+                    const oversLeft = 20 - parseFloat(currentInnings.o); // Assuming T20
+                    if (oversLeft > 0) {
+                        const reqRate = ((target - current) / oversLeft).toFixed(2);
+                        document.getElementById('required-rate').textContent = reqRate;
+                    } else {
+                        document.getElementById('required-rate').textContent = 'N/A';
+                    }
+                } else {
+                    document.getElementById('required-rate').textContent = 'N/A';
+                }
+            }
+        }
+        
+        // Get commentary
+        fetchCommentary(matchId);
+        
+        // Set up buttons
+        document.getElementById('scorecard-btn').onclick = () => showScorecard(matchId);
+        document.getElementById('squad-btn').onclick = () => showSquad(matchId);
+        
+        hideLoading();
+    } catch (err) {
+        console.error('Error getting match details:', err);
+        hideLoading();
+    }
+}
+
+// Fetch and display commentary
+async function fetchCommentary(matchId) {
+    try {
+        const commRes = await fetch(`/api/match-commentary/${matchId}`);
+        const commData = await commRes.json();
+        
+        const commentaryFeed = document.getElementById('commentary-feed');
+        commentaryFeed.innerHTML = '';
+        
+        if (commData.data && commData.data.length > 0) {
+            // Display the latest 10 commentary items
+            const commentaries = commData.data.slice(0, 10);
+            
+            commentaries.forEach(comm => {
+                const commentaryItem = document.createElement('div');
+                commentaryItem.className = 'commentary-item';
+                
+                const timestamp = new Date().toLocaleTimeString();
+                
+                commentaryItem.innerHTML = `
+                    <div class="commentary-time">${timestamp}</div>
+                    <div class="commentary-text">${comm.commentarySnippet || comm.comment || 'No commentary available'}</div>
+                `;
+                
+                commentaryFeed.appendChild(commentaryItem);
+            });
+        } else {
+            commentaryFeed.innerHTML = '<div class="commentary-item"><div class="commentary-text">No commentary available for this match.</div></div>';
+        }
+    } catch (err) {
+        console.error('Error fetching commentary:', err);
+        document.getElementById('commentary-feed').innerHTML = '<div class="commentary-item"><div class="commentary-text">Error loading commentary. Please try again later.</div></div>';
+    }
+}
+
+// Show full scorecard
+function showScorecard(matchId) {
+    fetch(`/api/match-score/${matchId}`)
+        .then(res => res.json())
+        .then(data => {
+            if (data.data) {
+                let scoreInfo = '';
+                
+                if (data.data.score) {
+                    data.data.score.forEach((inning, index) => {
+                        scoreInfo += `${data.data.teamInfo[index].name}: ${inning.r}/${inning.w} (${inning.o} overs)\n`;
+                    });
+                }
+                
+                alert(`Match: ${data.data.name}\nStatus: ${data.data.status}\n\nScorecard:\n${scoreInfo}`);
+            } else {
+                alert('Scorecard not available');
+            }
+        })
+        .catch(err => {
+            console.error('Error getting scorecard:', err);
+            alert('Error loading scorecard. Please try again later.');
+        });
+}
+
+// Show squad information
+function showSquad(matchId) {
+    fetch(`/api/match-players/${matchId}`)
+        .then(res => res.json())
+        .then(data => {
+            if (data.data && data.data.teamInfo) {
+                let squadInfo = '';
+                
+                data.data.teamInfo.forEach(team => {
+                    squadInfo += `${team.name} Squad:\n`;
+                    
+                    if (team.players && team.players.length > 0) {
+                        team.players.forEach(player => {
+                            squadInfo += `- ${player.name} (${player.role || 'Player'})\n`;
+                        });
+                    } else {
+                        squadInfo += 'Squad information not available\n';
+                    }
+                    
+                    squadInfo += '\n';
+                });
+                
+                alert(squadInfo);
+            } else {
+                alert('Squad information not available');
+            }
+        })
+        .catch(err => {
+            console.error('Error getting squad:', err);
+            alert('Error loading squad information. Please try again later.');
+        });
+}
+
+// Search for a player
+async function searchPlayer() {
+    const name = document.getElementById('playerInput').value;
+    if (!name) {
+        alert("Please enter a player name.");
+        return;
+    }
+
+    const playerResult = document.getElementById('playerResult');
+    playerResult.innerHTML = '<div class="loading-spinner"></div>';
+
+    try {
+        const res = await fetch(`/api/player/${name}`);
+        const data = await res.json();
+
+        if (!data.data || data.data.length === 0) {
+            playerResult.innerHTML = "<p>Player not found. Try a different name.</p>";
+            return;
+        }
+
+        const player = data.data[0];
+        playerResult.innerHTML = `
+            <h3>${player.name}</h3>
+            <p><strong>Country:</strong> ${player.country || 'Not available'}</p>
+            <p><strong>Role:</strong> ${player.role || 'Not available'}</p>
+            <p><strong>Playing Style:</strong> ${player.battingStyle || 'Not available'}</p>
+            <p><strong>Bowling Style:</strong> ${player.bowlingStyle || 'Not available'}</p>
+        `;
+    } catch (err) {
+        console.error('Error searching player:', err);
+        playerResult.innerHTML = "<p>Error searching for player. Please try again later.</p>";
+    }
+}
+
+// Set up refresh button
+document.getElementById('refresh-btn').addEventListener('click', () => {
+    fetchLiveMatches();
+});
+
+// Toggle mobile menu
+document.querySelector('.menu-toggle').addEventListener('click', function() {
+    const navLinks = document.querySelector('.nav-links');
+    navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+});
+
+// Auto-refresh data every 60 seconds
+setInterval(() => {
+    if (currentMatchId) {
+        fetchCommentary(currentMatchId);
+    }
+}, 60000);
+
+// Call live match fetch on load
+window.onload = fetchLiveMatches;
+</script>
+</body>
+</html>
